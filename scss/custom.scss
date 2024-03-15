@@ -1,0 +1,16 @@
+// Custom.scss file for customizing the theme of Bootstrap to fit the styling of IntelliViews
+//
+// Declare variable overrides here:
+$body-bg: #112531;
+$body-color: #fff;
+
+$primary: #046e8f;
+$secondary: #183446;
+$tertiary: #38aecc;
+
+// Main import of Bootstrap:
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Required Bootstrap stylesheets:
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
