@@ -1,0 +1,15 @@
+.iv-container {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "content content";
+}
+
+.iv-header {
+  grid-area: header;
+}
+
+.iv-content {
+  grid-area: content;
+  padding: 20px;
+}
