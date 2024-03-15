@@ -1,11 +1,18 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
+import { useMemo } from "react";
 
 function App() {
-  return (
-    <div className="d-flex flex-column align-items-center">
-      <h1>IntelliViews</h1>
-    </div>
-  );
+  const router = useMemo(() => {
+    return createBrowserRouter([
+      {
+        path: "/",
+        element: <div>Home</div>,
+      },
+    ]);
+  }, []);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
