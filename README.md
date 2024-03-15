@@ -1,1 +1,3 @@
-# IntelliViews-Frontend
+# IntelliViews
+
+## Table of Contents
