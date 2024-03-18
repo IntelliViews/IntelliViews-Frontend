@@ -1,8 +1,11 @@
 .iv-container {
   display: grid;
   grid-template-areas:
-    "header header"
-    "content content";
+    "header"
+    "content";
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content auto;
+  height: 100%;
 }
 
 .iv-header {
@@ -12,4 +15,5 @@
 .iv-content {
   grid-area: content;
   padding: 20px;
+  height: 100%;
 }

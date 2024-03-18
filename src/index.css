@@ -1,4 +1,10 @@
-.root {
+:root {
+  --bs-tertiary: #38aecc;
+}
+
+#root,
+body,
+html {
   width: 100%;
   height: 100%;
 }
