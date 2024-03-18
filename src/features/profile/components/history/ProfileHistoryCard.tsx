@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Message } from "../../../models/Message";
-import "../styles/ProfileHistoryCard.css";
+import { Message } from "../../../../models/Message";
+import "./ProfileHistoryCard.css";
 
 export default function ProfileHistoryCard({ message }: { message: Message }) {
   return (

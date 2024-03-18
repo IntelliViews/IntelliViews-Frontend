@@ -1,7 +1,7 @@
 import ProfileIcon from "../common/profile-icon/ProfileIcon";
 import "./styles/Profile.css";
-import ProfileInterviewHistory from "./components/ProfileInterviewHistory";
-import ProfileRatingsList from "./components/ProfileRatingsList";
+import ProfileInterviewHistory from "./components/history/ProfileInterviewHistory";
+import ProfileRatingsList from "./components/ratings/ProfileRatingsList";
 
 export default function Profile() {
   return (
@@ -17,7 +17,7 @@ export default function Profile() {
         <ProfileRatingsList />
       </div>
       <div className="card card__profile-info">
-        <h3>Interview History:</h3>
+        <h3>Interview history:</h3>
         <ProfileInterviewHistory />
       </div>
     </div>

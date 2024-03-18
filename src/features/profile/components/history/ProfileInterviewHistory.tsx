@@ -1,6 +1,6 @@
-import { Message } from "../../../models/Message";
+import { Message } from "../../../../models/Message";
 import ProfileHistoryCard from "./ProfileHistoryCard";
-import "../styles/ProfileInterviewHistory.css";
+import "./ProfileInterviewHistory.css";
 
 const sampleMessage: Message = {
   created_at: 1699017614,

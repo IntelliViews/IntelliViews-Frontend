@@ -7,4 +7,5 @@
 
 .card__profile-history p {
   margin: 0;
+  text-overflow: ellipsis;
 }
