@@ -1,0 +1,22 @@
+.iv-profile-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 150%;
+  transition: 150ms ease-in-out all;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.iv-profile-icon h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.iv-profile-icon:hover {
+  scale: 1.05;
+  box-shadow: 0px 0px 10px rgb(0, 0, 0);
+}

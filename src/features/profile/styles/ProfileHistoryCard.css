@@ -1,0 +1,10 @@
+.card__profile-history {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: var(--bs-tertiary) !important;
+  height: 100px !important;
+}
+
+.card__profile-history p {
+  margin: 0;
+}

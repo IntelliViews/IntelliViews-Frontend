@@ -1,0 +1,30 @@
+.container__profile {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+}
+
+.container__profile .card {
+  padding: 10px;
+  background-color: var(--bs-secondary);
+  height: 100%;
+}
+
+.card__profile-user {
+  grid-column: 1 / span 2;
+  display: flex;
+}
+
+.card__profile-user h1 {
+  margin: 0;
+}
+
+.card__profile-user__user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card__profile-info {
+}
