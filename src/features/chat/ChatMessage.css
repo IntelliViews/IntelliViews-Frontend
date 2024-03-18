@@ -1,0 +1,22 @@
+.chat__message {
+  width: auto;
+  max-width: 50%;
+  line-height: 30px;
+  text-wrap: wrap;
+  list-style: none;
+  padding: 10px;
+  text-align: center;
+}
+
+.chat__message p {
+  margin: 0;
+}
+
+.chat__message--user {
+  background-color: var(--bs-primary);
+  margin-left: auto;
+}
+
+.chat__message--assistant {
+  background-color: var(--bs-secondary);
+}
