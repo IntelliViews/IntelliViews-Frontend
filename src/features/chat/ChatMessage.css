@@ -5,7 +5,7 @@
   text-wrap: wrap;
   list-style: none;
   padding: 10px;
-  text-align: center;
+  text-align: left;
 }
 
 .chat__message p {

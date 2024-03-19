@@ -1,8 +1,7 @@
-import { Message } from "../../models/Message";
 import "./ChatMessage.css";
 
 interface Props {
-  message: Message;
+  message: any;
   isUser: boolean;
 }
 
@@ -13,7 +12,7 @@ export default function ChatMessage(props: Props) {
         props.isUser ? "user" : "assistant"
       }`}
     >
-      <p>{props.message.value}</p>
+      <p>{props.message.content[0].text.value}</p>
     </li>
   );
 }
