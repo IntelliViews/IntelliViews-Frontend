@@ -7,7 +7,7 @@ interface User {
   email?: string;
 }
 
-function RegistrationPage() {
+function Registration() {
   const [registeredUser, setRegisteredUser] = useState<User>({});
   const newUser = {
     username: "",
@@ -50,4 +50,4 @@ function RegistrationPage() {
 
 }
 
-export default RegistrationPage;
+export default Registration;
