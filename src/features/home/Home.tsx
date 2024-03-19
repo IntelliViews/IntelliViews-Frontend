@@ -25,23 +25,23 @@ export default function Home() {
               <div className="container mt-5">
                 <ol>
                   <li>
-                    Select Your Industry and Job Title: 
+                    <b>Select Your Industry and Job Title: </b>
                     Tell us which industry you're targeting and the job title you're practicing for. This helps us customize the interview questions and feedback to suit your needs.
                   </li>
                   <li>
-                    Mock-Interview Session: 
+                    <b>Mock-Interview Session: </b>
                     Engage in a realistic mock-interview session with our AI chatbot. Answer a series of questions just like you would in a real interview.
                   </li>
                   <li>
-                    Receive Feedback and Rating: 
+                    <b>Receive Feedback and Rating: </b>
                     After the session, our AI will rate your performance on a scale of 1 to 10 and provide detailed feedback on areas for improvement.
                   </li>
                   <li>
-                    Track Your Progress: 
+                    <b>Track Your Progress: </b>
                     Keep track of your performance and progress over time. Your scores, feedback, and chat history are saved to your profile page for easy reference.
                   </li>
                   <li>
-                    Responsive Design: 
+                    <b>Responsive Design: </b>
                     Our platform is responsive and accessible across all devices, so you can practice your interview skills anytime, anywhere.
                   </li>
                 </ol>
