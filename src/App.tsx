@@ -6,6 +6,7 @@ import Home from "./features/home/Home";
 import Profile from "./features/profile/Profile";
 import RegistrationPage from "./registration/RegistrationPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Chat from "./features/chat/Chat";
 
 function App() {
   const router = useMemo(() => {
@@ -16,6 +17,7 @@ function App() {
         children: [
           { path: "/", element: <Home /> },
           { path: "/profile", element: <Profile /> },
+          { path: "/interview", element: <Chat /> },
         ],
       },
       {
