@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import MainLayout from "./features/layouts/MainLayout";
 import Home from "./features/home/Home";
 import Profile from "./features/profile/Profile";
+import RegistrationPage from "./registration/RegistrationPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -16,6 +17,10 @@ function App() {
           { path: "/", element: <Home /> },
           { path: "/profile", element: <Profile /> },
         ],
+      },
+      {
+        path: "/registration",
+        element: <RegistrationPage />,
       },
     ]);
   }, []);
