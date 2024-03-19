@@ -13,7 +13,7 @@ export default function ChatMessage(props: Props) {
         props.isUser ? "user" : "assistant"
       }`}
     >
-      <p>Some text</p>
+      <p>{props.message.value}</p>
     </li>
   );
 }
