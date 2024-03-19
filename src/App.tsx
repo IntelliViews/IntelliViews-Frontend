@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import MainLayout from "./features/layouts/MainLayout";
 import Home from "./features/home/Home";
 import Profile from "./features/profile/Profile";
-import RegistrationPage from "./registration/RegistrationPage";
+import Registration from "./features/registration/Registration";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Chat from "./features/chat/Chat";
 
@@ -22,7 +22,7 @@ function App() {
       },
       {
         path: "/registration",
-        element: <RegistrationPage />,
+        element: <Registration />,
       },
     ]);
   }, []);
