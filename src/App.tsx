@@ -18,11 +18,8 @@ function App() {
           { path: "/", element: <Home /> },
           { path: "/profile", element: <Profile /> },
           { path: "/interview", element: <Chat /> },
+          { path: "/registration", element: <Registration /> },
         ],
-      },
-      {
-        path: "/registration",
-        element: <Registration />,
       },
     ]);
   }, []);
