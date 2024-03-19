@@ -1,0 +1,18 @@
+.profile-interview-history {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  height: auto;
+  max-height: 500px;
+  overflow-y: auto;
+  scrollbar-color: transparent transparent;
+
+  /* Hide scrollbar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.profile-interview-history::-webkit-scrollbar {
+  /* Hide scrollbar */
+  display: none;
+}
