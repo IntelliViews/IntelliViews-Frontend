@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form';
+import { Link } from "react-router-dom";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import FormField from './FormField';
-import FormErrorPrinter from './FormErrorPrinter';
+import FormField from '../../common/form-components/FormField';
+import FormErrorPrinter from '../../common/form-components/FormErrorPrinter';
 
 // Inspiration for these forms taken from this youtube-tutorial: 
 // "How to build elegant React forms with React Hook Form" - https://youtu.be/4oCH5WaJHzk?si=M4qVUkF8kzFF3hSc
@@ -164,71 +165,81 @@ const schema = z.object({
 });
 
 // THE ACTUAL FORM
-function RegistrationForm({ onSave, newUser }) {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    defaultValues: newUser,
+function RegistrationForm({ handleRegistration }) {
+    
+    const clearedUserInfo = {
+        username: "",
+        email: "",
+        password: "",
+        confirmpassword: ""
+      };
+    const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: clearedUserInfo,
     resolver: zodResolver(schema),
     mode: 'onChange', // Trigger validation on input change
   });
 
-  const handleSave = (formValues: object) => {
-    onSave(formValues);
+  const handleRegistrationForm = (formValues: object) => {
+    handleRegistration(formValues);
   }
 
     return (
-      <form className="container mt-5" onSubmit={handleSubmit(handleSave)}>
-      <FormField
-        label="Username"
-        type="text"
-        placeholder="Enter username"
-        name="username"
-        register={register}
-      />
-      <FormErrorPrinter 
-        name='username'
-        errors={errors}
-      />
+    <>
+        <form className="container mt-5" onSubmit={handleSubmit(handleRegistrationForm)}>
+        
+            <FormField
+                label="Username"
+                type="text"
+                placeholder="Enter username"
+                name="username"
+                register={register}
+            />
+            <FormErrorPrinter 
+                name='username'
+                errors={errors}
+            />
 
-      <FormField
-        label="Email"
-        type="text"
-        placeholder="Enter email"
-        name="email"
-        register={register}
-      />
-      <FormErrorPrinter 
-        name='email'
-        errors={errors}
-      />
-
-
-      <FormField
-        label="Password"
-        type="password"
-        placeholder="Enter password"
-        name="password"
-        register={register}
-      />
-      <FormErrorPrinter 
-        name='password'
-        errors={errors}
-      />
-      
-      <FormField
-        label="Confirm password"
-        type="password"
-        placeholder="Confirm password"
-        name="confirmpassword"
-        register={register}
-      />
-      <FormErrorPrinter 
-        name='confirmpassword'
-        errors={errors}
-      />
+            <FormField
+                label="Email"
+                type="text"
+                placeholder="Enter email"
+                name="email"
+                register={register}
+            />
+            <FormErrorPrinter 
+                name='email'
+                errors={errors}
+            />
 
 
-      <button type="submit" className="btn btn-primary">Register</button>
-    </form>
+            <FormField
+                label="Password"
+                type="password"
+                placeholder="Enter password"
+                name="password"
+                register={register}
+            />
+            <FormErrorPrinter 
+                name='password'
+                errors={errors}
+            />
+            
+            <FormField
+                label="Confirm password"
+                type="password"
+                placeholder="Confirm password"
+                name="confirmpassword"
+                register={register}
+            />
+            <FormErrorPrinter 
+                name='confirmpassword'
+                errors={errors}
+            />
+
+            <button type="submit" className="btn btn-primary">Register</button>
+        </form>
+        <h4 className='mt-5'>Already registered? <Link to='/' > Back to login</Link></h4>
+    </>
     )
 }
 

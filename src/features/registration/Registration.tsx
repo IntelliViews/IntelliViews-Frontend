@@ -9,14 +9,8 @@ interface User {
 
 function Registration() {
   const [registeredUser, setRegisteredUser] = useState<User>({});
-  const newUser = {
-    username: "",
-    email: "",
-    password: "",
-    confirmpassword: "" //Unsure if needed here
-  };
 
-  const handleSave = ( values: object ) => {
+  const handleRegistration = ( values: object ) => {
     //send data to the server here
 
     console.log("Registered user:", values);
@@ -28,7 +22,7 @@ function Registration() {
     return (
       <div className="container mt-5">
         <h2>Register your account</h2>
-        <RegistrationForm onSave={handleSave} {...{ newUser }}/>
+        <RegistrationForm handleRegistration={handleRegistration} />
       </div>
     );
 
