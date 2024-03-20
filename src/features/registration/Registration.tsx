@@ -8,14 +8,8 @@ function Registration() {
   const { userContext } = useContext(AuthContext)!;
   const [error, setError] = useState();
   const [user, setUser] = userContext;
-  const newUser = {
-    username: "",
-    email: "",
-    password: "",
-    confirmpassword: "", //Unsure if needed here
-  };
 
-  const handleSave = (values: object) => {
+  const handleRegistration = (values: object) => {
     //send data to the server here
     register(values)
       .then((data: any) => {
@@ -27,7 +21,7 @@ function Registration() {
   return (
     <div className="container mt-5">
       <h2>Register your account</h2>
-      <RegistrationForm onSave={handleSave} {...{ newUser }} />
+      <RegistrationForm handleRegistration={handleRegistration} />
       {user && (
         <>
           <h2>New account registered</h2>
