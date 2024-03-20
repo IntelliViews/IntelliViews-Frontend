@@ -12,9 +12,8 @@ interface Feedback {
     Improvment: string[]
 }
 
-
-
 export default function CheckListComponent() {
+    const [progress, setProgress] = useState(0); // Initialize progress state
     const [feedbacks, setFeedback] = useState<Feedback[]>([
         // Dummy data.:
         {
@@ -33,21 +32,41 @@ export default function CheckListComponent() {
             CreatedAt: 1699017614,
             Context: "Test context2",
             Score: 1,
-            Improvment: ["Test improvment 3", "Test improvment 4"]
+            Improvment: ["Test improvment 3", "Test improvment 4", "Test"]
             }
     ]);
-
+    
+         // Calculate overall progress based on checked items
+        const calculateProgress = (checked:boolean) => {
+            const totalItems = feedbacks.reduce(
+            (acc, feedback) => acc + feedback.Improvment.length,
+            0 );
+            const checkedItems = checked ? 1 : -1;
+            const newProgress = progress + ((checkedItems) / totalItems)*100 ;
+            setProgress(newProgress);  
+        };
 
   return (
     <div className='container profile-interview-checklist'>
          {feedbacks && feedbacks.map((feedback, key) => (
+            
               <ul className="list-group rounded-0 m-0" key={key}>
                 {feedback.Improvment.map((improvement, key) => (
-                    <CheckListComponentItem improvement={improvement} key={key} />
+                    <CheckListComponentItem improvement={improvement} key={key} fnCheck={calculateProgress}/>
                 ))}
               </ul>
           ))}
-
+        {/* Progress bar */}
+      <div className="progress">
+        <div
+          className="progress-bar progress-bar-striped progress-bar-animated"
+          role="progressbar"
+          style={{ width: `${progress}%` }}
+          // aria-valuenow={progress}
+          // aria-valuemin="0"
+          // aria-valuemax="100"
+        ></div>
+      </div>
     </div>
   )
 }
