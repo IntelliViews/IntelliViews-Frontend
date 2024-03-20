@@ -12,9 +12,7 @@ export default function Header() {
     <nav className="iv-header">
       <div className="iv-header--content container justify-content-between">
         <h1 className="iv-header--logo">
-          <Link className="nav-link" to="/">
-            IntelliViews
-          </Link>
+          <Link to="/">IntelliViews</Link>
         </h1>
         <div className="nav">
           <Link className="nav-link" to="/">
