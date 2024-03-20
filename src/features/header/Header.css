@@ -1,6 +1,7 @@
 .iv-header {
   background-color: var(--bs-primary);
   box-shadow: rgba(31, 32, 33, 0.2) 0px 8px 24px;
+  cursor: pointer;
 }
 
 .iv-header--content {

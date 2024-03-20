@@ -11,7 +11,11 @@ export default function Header() {
   return (
     <nav className="iv-header">
       <div className="iv-header--content container justify-content-between">
-        <h1 className="iv-header--logo">IntelliViews</h1>
+        <h1 className="iv-header--logo">
+          <Link className="nav-link" to="/">
+            IntelliViews
+          </Link>
+        </h1>
         <div className="nav">
           <Link className="nav-link" to="/">
             Home
@@ -23,14 +27,16 @@ export default function Header() {
             Interview
           </Link>
         </div>
-        <div className="d-flex align-items-center gap-2 justify-content-end">
+        <div className="d-flex align-items-center gap-2 justify-content-end user-select-none">
           {user ? (
             <>
               <ProfileIcon username={username} diameter={40} />
               <p style={{ margin: "0", opacity: "0.7" }}>{username}</p>
             </>
           ) : (
-            <p style={{ margin: "0", opacity: "0.7" }}>Login</p>
+            <p style={{ margin: "0", opacity: "0.7", cursor: "not-allowed" }}>
+              Login
+            </p>
           )}
         </div>
       </div>
