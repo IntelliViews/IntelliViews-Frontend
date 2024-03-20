@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Login from "./components/Login/Login";
 
 export default function Home() {
   return (
@@ -9,7 +10,8 @@ export default function Home() {
             <div className="col-7"> {/* style={{ backgroundColor: "grey" }} */}
 
               <div className="container mt-5">
-                <h2>Welcome to IntelliViews</h2>
+                <h1>Welcome to IntelliViews</h1>
+                <h3>Unlock Your Potential: Elevate Your Interview Skills with AI!</h3>
 
                 <p className="mt-5">
                   At IntelliViews, we understand the importance of mastering your interview skills to land your dream job. Whether you're aiming for a position in tech, finance, healthcare, or any other industry, we're here to help you excel.
@@ -52,43 +54,22 @@ export default function Home() {
                   Ready to take your interview skills to the next level?
                 </h4>
                 <h5 className="mt-3">
-                  <Link to="/registration">Sign up now</Link> and start your journey towards interview success with InterviewBoost!
+                  <Link to="/registration">Sign up now</Link> and start your journey towards interview success with IntelliViews!
                 </h5>
               </div>
 
             </div>
 
             <div className="col-5" > {/* style={{ backgroundColor: "blue" }} */}
+
               {/* Login component will be here, just some tempcode and templogo here ATM*/}
               <div className="container mt-5 d-flex justify-content-center">
                 <img src="/src/assets/images/logo/logo.png" width="100px" alt="" />
               </div>
               <h1 className="container d-flex justify-content-center">IntelliViews</h1>
-
-              <div className="container mt-5">
-                <h2 className="">Welcome back</h2>
-                <p className="mt-3">Let's log in to your account</p>
-              </div>
-
-              <form className="container mt-5">
-                  <div className="mb-3">
-                    <label className="form-label">Your email:</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Ex: nigel@boolean.co.uk"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label className="form-label">Password</label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      placeholder="Your password"
-                    />
-                  </div>
-                <button type="submit" className="mb-5 btn btn-primary">Register</button>
-              </form>
+              
+              <Login />
+              
             </div>
           </div>
         </div>
