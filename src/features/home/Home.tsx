@@ -9,7 +9,8 @@ export default function Home() {
             <div className="col-7"> {/* style={{ backgroundColor: "grey" }} */}
 
               <div className="container mt-5">
-                <h2>Welcome to IntelliViews</h2>
+                <h1>Welcome to IntelliViews</h1>
+                <h3>Unlock Your Potential: Elevate Your Interview Skills with AI!</h3>
 
                 <p className="mt-5">
                   At IntelliViews, we understand the importance of mastering your interview skills to land your dream job. Whether you're aiming for a position in tech, finance, healthcare, or any other industry, we're here to help you excel.
@@ -52,7 +53,7 @@ export default function Home() {
                   Ready to take your interview skills to the next level?
                 </h4>
                 <h5 className="mt-3">
-                  <Link to="/registration">Sign up now</Link> and start your journey towards interview success with InterviewBoost!
+                  <Link to="/registration">Sign up now</Link> and start your journey towards interview success with IntelliViews!
                 </h5>
               </div>
 

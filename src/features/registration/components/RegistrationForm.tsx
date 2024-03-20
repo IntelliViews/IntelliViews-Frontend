@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import FormField from './FormField';
+import FormErrorPrinter from './FormErrorPrinter';
 
 // Inspiration for these forms taken from this youtube-tutorial: 
 // "How to build elegant React forms with React Hook Form" - https://youtu.be/4oCH5WaJHzk?si=M4qVUkF8kzFF3hSc
-
 
 const testUsers = [ //For testing of validation. 
     { username: "Lauv", email: "lauvhjell@gmail.com" },
@@ -28,8 +28,8 @@ const schema = z.object({
     
     //Populate possible errors the user may get
     let errObj = {
-        usernameLength: { pass: true, message: `Username must be between ${minLength} and ${maxLength} long.` },
-        usernameInUse: { pass: true, message: `Username is already taken.` }, 
+        usernameLength: { pass: true, message: `Username is between ${minLength} and ${maxLength} long.` },
+        usernameInUse: { pass: true, message: `Username is available.` }, 
     };
 
     // Check if username meets validation requirements
@@ -58,8 +58,9 @@ const schema = z.object({
 
     //Populate possible errors the user may get
     let errObj = {
-        emailValidation: { pass: true, message: `Email is not a valid email` },
-        emailInUse: { pass: true, message: `Email is already registered.` },
+        emailValidation: { pass: true, message: `Email is a valid email` },
+        emailInUse: { pass: true, message: `Email is not already registered.` }, //*
+        //*Can be a security weakness due to how fast it is to scan what mails are used. Recommended to change. I got to think of an alternative, if time permits it.
     };
 
     // Check if email meets validation requirements
@@ -101,10 +102,10 @@ const schema = z.object({
 
     //Populate possible errors the user may get
     let errObj = {
-        passwordLength: { pass: true, message: "Password must at least be 8 characters long" },
-        upperCase: { pass: true, message: "Password must contain at least one upper case letter." },
-        lowerCase: { pass: true, message: "Password must contain at least one lower case letter." },
-        totalNumber: { pass: true, message: "Password must contain at least one number." },
+        passwordLength: { pass: true, message:  "Password is at least 8 characters long" },
+        upperCase: { pass: true, message:       "Password contains at least one upper case letter." },
+        lowerCase: { pass: true, message:       "Password contains at least one lower case letter." },
+        totalNumber: { pass: true, message:     "Password contains at least one number." },
     };
 
     // Check if password meets validation requirements
@@ -143,7 +144,7 @@ const schema = z.object({
     
     //Populate possible errors the user may get
     let errObj = {
-        passwordConfirmed: { pass: true, message: `Passwords must be identical` },
+        passwordConfirmed: { pass: true, message: `Passwords are identical` },
     };
 
     // Check if password confirmation meets validation requirements
@@ -182,6 +183,9 @@ function RegistrationForm({ onSave, newUser }) {
         placeholder="Enter username"
         name="username"
         register={register}
+      />
+      <FormErrorPrinter 
+        name='username'
         errors={errors}
       />
 
@@ -191,8 +195,12 @@ function RegistrationForm({ onSave, newUser }) {
         placeholder="Enter email"
         name="email"
         register={register}
+      />
+      <FormErrorPrinter 
+        name='email'
         errors={errors}
       />
+
 
       <FormField
         label="Password"
@@ -200,17 +208,24 @@ function RegistrationForm({ onSave, newUser }) {
         placeholder="Enter password"
         name="password"
         register={register}
+      />
+      <FormErrorPrinter 
+        name='password'
         errors={errors}
       />
-
+      
       <FormField
         label="Confirm password"
         type="password"
         placeholder="Confirm password"
         name="confirmpassword"
         register={register}
+      />
+      <FormErrorPrinter 
+        name='confirmpassword'
         errors={errors}
       />
+
 
       <button type="submit" className="btn btn-primary">Register</button>
     </form>
