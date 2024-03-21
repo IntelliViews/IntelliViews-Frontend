@@ -28,7 +28,7 @@ export default function UsersList({
           scrollbarColor: "var(--bs-primary) transparent",
         }}
       >
-        {users.map((user) => (
+        {users.map((user: any) => (
           <button
             key={user.id}
             type="button"

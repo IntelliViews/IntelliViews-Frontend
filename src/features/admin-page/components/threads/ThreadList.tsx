@@ -3,17 +3,17 @@ import { getThreadsByUser } from "../../../../services/IntelliViewsService";
 import { getThreadById } from "../../../../services/OpenAiService";
 
 interface Props {
-  selectedUser: object;
+  selectedUser: any;
 }
 
 export default function ThreadList(props: Props) {
-  const [threads, setThreads] = useState([]);
+  const [threads, setThreads] = useState<any>([]);
 
   useEffect(() => {
     setThreads([]);
     getThreadsByUser(props.selectedUser.id).then((response) => {
       response.data.map((thread: any) =>
-        getThreadById(thread.id).then((response) => {
+        getThreadById(thread.id).then((response: any) => {
           setThreads([...threads, response.data]);
         })
       );
@@ -29,7 +29,7 @@ export default function ThreadList(props: Props) {
           scrollbarColor: "var(--bs-primary) transparent",
         }}
       >
-        {threads.map((thread) => (
+        {threads.map((thread: any) => (
           <button
             key={thread.id}
             type="button"
