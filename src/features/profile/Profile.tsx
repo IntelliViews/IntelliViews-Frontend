@@ -17,9 +17,11 @@ export default function Profile() {
           <ProfileInterviewHistory />
         </div>
         <div className="card card__profile-info--span-2">
-          <h3> Improvement points: </h3>
-          <p className="text-muted pb-2">Try to finish some these points!</p>
-          <CheckListComponent />
+          <div className="card__profile-user__user-checklist">
+            <h3> Improvement points: </h3>
+            <p className="text-muted pb-2">Try to finish some these points!</p>
+            <CheckListComponent />
+          </div>
         </div>
       </div>
     </div>
