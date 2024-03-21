@@ -16,6 +16,9 @@ export default function Header() {
           <Link className="nav-link" to="/interview">
             Interview
           </Link>
+          <Link className="nav-link" to="/admin">
+            Test
+          </Link>
         </div>
       </div>
     </nav>

@@ -7,6 +7,7 @@ import Profile from "./features/profile/Profile";
 import Registration from "./features/registration/Registration";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Chat from "./features/chat/Chat";
+import AdminPage from "./features/admin-page/AdminPage";
 
 function App() {
   const router = useMemo(() => {
@@ -19,6 +20,7 @@ function App() {
           { path: "/profile", element: <Profile /> },
           { path: "/interview", element: <Chat /> },
           { path: "/registration", element: <Registration /> },
+          { path: "/admin", element: <AdminPage /> },
         ],
       },
     ]);

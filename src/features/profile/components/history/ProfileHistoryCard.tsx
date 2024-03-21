@@ -11,3 +11,4 @@ export default function ProfileHistoryCard({ message }: { message: Message }) {
     </div>
   );
 }
+

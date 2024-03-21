@@ -1,0 +1,39 @@
+.container__admin {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    
+  }
+  
+  .container__admin .card {
+    padding: 10px;
+    background-color: var(--bs-secondary);
+    height: 100%;
+    gap: 20px;
+  }
+  
+  .card__admin-user {
+    grid-column: 1 / span 2;
+    display: flex;
+  }
+  
+  .card__admin-user h1 {
+    margin: 0;
+  }
+  
+  .card__admin-user__user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card > .card__admin-item {
+    grid-column: 1 / span 2; 
+    display: flex;
+    background-color: aqua;
+  }
+
+ 
+  
+  

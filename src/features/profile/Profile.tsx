@@ -7,7 +7,6 @@ import CheckListComponent from "./components/ichecklist/CheckListComponent";
 export default function Profile() {
   return (
     <div className="container container__profile" style={{ height: "auto" }}>
-
       <div className="card card__profile-user">
         <div className="card__profile-user__user-info">
           <ProfileIcon diameter={96} username="Username" />
@@ -27,9 +26,9 @@ export default function Profile() {
 
       <div className="card card__profile-user">
         <div className="card__profile-user__user-checklist">
-        <h3> Improvement points: </h3>
-        <p className="text-muted pb-2">Try to finish some these points!</p>
-        <CheckListComponent />
+          <h3> Improvement points: </h3>
+          <p className="text-muted pb-2">Try to finish some these points!</p>
+          <CheckListComponent />
         </div>
       </div>
     </div>
