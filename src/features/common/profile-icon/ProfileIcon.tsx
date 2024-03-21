@@ -12,8 +12,10 @@ export default function ProfileIcon(props: Props) {
     <div
       className="iv-profile-icon"
       style={{
-        height: props.diameter + "px",
-        width: props.diameter + "px",
+        minHeight: props.diameter + "px",
+        minWidth: props.diameter + "px",
+        maxHeight: props.diameter + "px",
+        maxWidth: props.diameter + "px",
         backgroundColor: props.backgroundColor || "var(--bs-tertiary)",
         color: props.color || "#fff",
       }}

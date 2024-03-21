@@ -14,7 +14,7 @@ export default function FeedbackForm() {
   }, [ratingRange]);
 
   return (
-    <form action="" className=" ">
+    <form action="" className="">
       {/* Feedback field */}
       <div className="field field-feedback m-3 my-4">
         <div className="d-flex flex-start w-100 gap-3">

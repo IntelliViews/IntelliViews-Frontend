@@ -60,8 +60,8 @@ export default function AdminPage() {
       </div>
 
       {/* Feedback form */}
-      <div className="card card__admin-user">
-        <div className="card__admin-user__user-feedback">
+      <div style={{ gridColumn: "1 / span 2" }}>
+        <div>
           <h3>Feedback</h3>
           <p className="text-muted pb-2">Please provide feedback to the user</p>
           <FeedbackForm />

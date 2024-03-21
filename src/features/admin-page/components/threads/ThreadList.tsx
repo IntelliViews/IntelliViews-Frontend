@@ -30,7 +30,7 @@ export default function ThreadList(props: Props) {
   return (
     <div className="container admin-thread">
       <div
-        className="list-group list-group--threads overflow-auto"
+        className="list-group list-group--threads overflow-auto gap-3"
         style={{
           maxHeight: "300px",
           scrollbarColor: "var(--bs-primary) transparent",
@@ -40,11 +40,14 @@ export default function ThreadList(props: Props) {
           <button
             key={thread.id}
             type="button"
-            className="list-group-item list-group-item-action d-flex flex-row gap-4 align-items-center"
+            className="card d-flex flex-row gap-4 align-items-center"
+            style={{ backgroundColor: "var(--bs-tertiary)" }}
             onClick={() => props.selectedThread(thread)}
           >
-            <p>{new Date(thread["created_at"]).toDateString()}</p>
-            <p>{thread.id}</p>
+            <p className="m-0">
+              {new Date(thread["created_at"] * 1000).toUTCString()}
+            </p>
+            <p className="m-0">{thread.id}</p>
           </button>
         ))}
       </div>
