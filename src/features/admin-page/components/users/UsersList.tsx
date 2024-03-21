@@ -1,34 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dispatch, SetStateAction } from "react";
-
-interface User {
-  Id: string;
-  CreatedAt: number;
-}
+import { getUsers } from "../../../../services/IntelliViewsService";
 
 export default function UsersList({
   setSelectedUser,
 }: {
-  setSelectedUser: Dispatch<SetStateAction<User | null>>;
+  setSelectedUser: Dispatch<SetStateAction<any | null>>;
 }) {
-  const [users, setUsers] = useState<User[]>([
-    // Dummy data:
-    { Id: "TestId1", CreatedAt: 11111 },
-    { Id: "TestId2", CreatedAt: 22222 },
-    { Id: "TestId3", CreatedAt: 333 },
-    { Id: "TestId3", CreatedAt: 333 },
-    { Id: "TestId3", CreatedAt: 333 },
-    { Id: "TestId3", CreatedAt: 333 },
-    { Id: "TestId3", CreatedAt: 333 },
-    { Id: "TestId3", CreatedAt: 333 },
-    { Id: "TestId3", CreatedAt: 333 },
-  ]);
+  const [users, setUsers] = useState([]);
 
-  const handleUserClick = (user: User) => {
+  const handleUserClick = (user: any) => {
     setSelectedUser(user);
-    localStorage.setItem("UserId", user.Id);
-    console.log("hahah");
   };
+
+  useEffect(() => {
+    getUsers().then((data: any) => {
+      setUsers(data.data);
+    });
+  }, []);
 
   return (
     <div className="container admin-users">
@@ -41,11 +30,12 @@ export default function UsersList({
       >
         {users.map((user) => (
           <button
+            key={user.id}
             type="button"
             className="list-group-item list-group-item-action "
             onClick={() => handleUserClick(user)}
           >
-            {user.Id}
+            {user.email}
           </button>
         ))}
       </div>

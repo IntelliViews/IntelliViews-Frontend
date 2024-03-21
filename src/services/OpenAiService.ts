@@ -1,4 +1,5 @@
 import axios from "axios";
+import { threadId } from "worker_threads";
 
 const BASE_API_URL = "https://api.openai.com/v1/";
 const headers = {
@@ -46,4 +47,11 @@ export const getMessages = (threadId: string) => {
   return axios.get(BASE_API_URL + `threads/${threadId}/messages`, {
     headers: headers,
   });
+};
+
+export const getThreadById = (threadId: string) => {
+  const data = axios
+    .get(BASE_API_URL + `threads/${threadId}`, { headers: headers })
+    .then((response) => response.data);
+  return data;
 };

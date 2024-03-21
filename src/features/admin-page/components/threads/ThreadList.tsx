@@ -1,28 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getThreadsByUser } from "../../../../services/IntelliViewsService";
+import { getThreadById } from "../../../../services/OpenAiService";
 
-interface Thread {
-  Id: string;
-  CreatedAt: number;
-  UserId: string;
+interface Props {
+  selectedUser: object;
 }
 
-export default function ThreadList() {
-  const [threads, setThreads] = useState<Thread[]>([
-    // Dummy data:
-    { Id: "TestThreadId1", CreatedAt: 11111, UserId: "TestUserId1" },
-    { Id: "TestThreadId2", CreatedAt: 22222, UserId: "TestUserId1" },
-    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
-    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
-    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
-    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
-    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
-    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
-    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
-  ]);
+export default function ThreadList(props: Props) {
+  const [threads, setThreads] = useState([]);
 
-  const handleUserClick = (thread: Thread) => {
-    localStorage.setItem("threadId", thread.Id);
-  };
+  useEffect(() => {
+    setThreads([]);
+    getThreadsByUser(props.selectedUser.id).then((response) => {
+      response.data.map((thread: any) =>
+        getThreadById(thread.id).then((response) => {
+          setThreads([...threads, response.data]);
+        })
+      );
+    });
+  }, [props.selectedUser.id]);
 
   return (
     <div className="container admin-thread">
@@ -35,12 +31,12 @@ export default function ThreadList() {
       >
         {threads.map((thread) => (
           <button
+            key={thread.id}
             type="button"
-            className="list-group-item list-group-item-action d-flex flex-row gap-4 align-items-center "
-            onClick={() => handleUserClick(thread)}
+            className="list-group-item list-group-item-action d-flex flex-row gap-4 align-items-center"
           >
-            <p>{new Date(thread.CreatedAt).toDateString()}</p>
-            <p>{thread.Id}</p>
+            <p>{new Date(thread.createdAt).toDateString()}</p>
+            <p>{thread.id}</p>
           </button>
         ))}
       </div>
