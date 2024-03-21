@@ -3,6 +3,11 @@
   box-shadow: rgba(31, 32, 33, 0.2) 0px 8px 24px;
 }
 
+.iv-header--logo a {
+  color: white;
+  text-decoration: none;
+}
+
 .iv-header--content {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
