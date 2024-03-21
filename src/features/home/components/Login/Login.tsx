@@ -22,7 +22,7 @@ function Login() {
     //send data to the server here
     login(values)
       .then((data: any) => {
-        console.log(data.data);
+        sessionStorage.setItem("user", JSON.stringify(data.data));
         setUser(data.data);
         setSuccessMessage(data.message);
         setCookie("user_token", data.data.token, { path: "/" });
