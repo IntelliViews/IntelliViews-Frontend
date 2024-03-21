@@ -36,6 +36,8 @@ export default function ThreadList(props: Props) {
           scrollbarColor: "var(--bs-primary) transparent",
         }}
       >
+        {!threads ||
+          (threads.length === 0 && <p>No interview history available...</p>)}
         {threads.map((thread: any) => (
           <button
             key={thread.id}
