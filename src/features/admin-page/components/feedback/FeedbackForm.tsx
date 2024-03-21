@@ -31,7 +31,7 @@ export default function FeedbackForm() {
       </div>
 
       {/* Score field */}
-      <div className="field field-score m-3 ">
+      <div className="field field-score">
         <h4>Select score</h4>
         <div
           className="btn-toolbar"
@@ -47,7 +47,7 @@ export default function FeedbackForm() {
                   name="btnradio"
                   id={`radio-${value}`}
                   autoComplete="off"
-                  checked
+                  defaultChecked
                 />
                 <label
                   className="btn btn-outline-primary"
