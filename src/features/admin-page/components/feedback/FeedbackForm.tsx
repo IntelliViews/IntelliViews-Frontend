@@ -8,19 +8,18 @@ export default function FeedbackForm() {
     <form action="" className=" ">
       {/* Feedback field */}
       <div className="field field-feedback m-3 my-4">
-
-      <div className="d-flex flex-start w-100 gap-3">
-        <ProfileIcon diameter={80} username="Username" />
-        <div className="form-outline w-100">
-          <textarea
-            className="form-control"
-            id="textAreaExample"
-            placeholder="Please write feedback to the user here!"
-            rows="4"
+        <div className="d-flex flex-start w-100 gap-3">
+          <ProfileIcon diameter={80} username="Username" />
+          <div className="form-outline w-100">
+            <textarea
+              className="form-control"
+              id="textAreaExample"
+              placeholder="Please write feedback to the user here!"
+              rows="4"
             ></textarea>
+          </div>
         </div>
       </div>
-            </div>
 
       {/* Improvement points field */}
       <div className="field field-improvment m-3 my-4 ">

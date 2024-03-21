@@ -1,13 +1,10 @@
-
 import { useState } from "react";
 
 interface Thread {
-  Id: string,
-  CreatedAt: number,
-  UserId: string
+  Id: string;
+  CreatedAt: number;
+  UserId: string;
 }
-
-
 
 export default function ThreadList() {
   const [threads, setThreads] = useState<Thread[]>([
@@ -15,16 +12,27 @@ export default function ThreadList() {
     { Id: "TestThreadId1", CreatedAt: 11111, UserId: "TestUserId1" },
     { Id: "TestThreadId2", CreatedAt: 22222, UserId: "TestUserId1" },
     { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
+    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
+    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
+    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
+    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
+    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
+    { Id: "TestThreadId3", CreatedAt: 33333, UserId: "TestUserId1" },
   ]);
 
   const handleUserClick = (thread: Thread) => {
-    localStorage.setItem("ThreadId", thread.Id)
-    console.log("HOHOHO");
+    localStorage.setItem("threadId", thread.Id);
   };
 
   return (
     <div className="container admin-thread">
-      <div className="list-group list-group--threads">
+      <div
+        className="list-group list-group--threads overflow-auto"
+        style={{
+          maxHeight: "300px",
+          scrollbarColor: "var(--bs-primary) transparent",
+        }}
+      >
         {threads.map((thread) => (
           <button
             type="button"

@@ -18,21 +18,22 @@ export default function Header() {
           <Link className="nav-link" to="/">
             Home
           </Link>
-          <Link className="nav-link" to="/profile">
-            Profile
-          </Link>
           <Link className="nav-link" to="/interview">
             Interview
           </Link>
-          <Link className="nav-link" to="/admin">
-            Test
-          </Link>
+          {user && user.role === "admin" && (
+            <Link className="nav-link" to="/admin">
+              Manage
+            </Link>
+          )}
         </div>
         <div className="d-flex align-items-center gap-2 justify-content-end user-select-none">
           {user ? (
             <>
               <ProfileIcon username={username} diameter={40} />
-              <p style={{ margin: "0", opacity: "0.7" }}>{username}</p>
+              <Link to="/profile" style={{ margin: "0", opacity: "0.7" }}>
+                {username}
+              </Link>
             </>
           ) : (
             <p style={{ margin: "0", opacity: "0.7", cursor: "not-allowed" }}>
