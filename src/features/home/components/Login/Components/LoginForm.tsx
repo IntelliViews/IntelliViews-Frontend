@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+
 import { useForm } from 'react-hook-form';
 import FormField from "../../../../common/form-components/FormField"
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -11,6 +10,7 @@ const testUsers = [ //For testing of validation.
     { username: "Kanthee", email: "kanthee@gmail.com", password: "Password123"  }
 ];
 
+// Not in usee..
 const schema = z.object({
     email: z.string().email(),
     password: z.string().min(8)
@@ -31,25 +31,37 @@ function LoginForm({handleLogin}) {
         username: "",
         email: "",
     };
+    // const {register, handleSubmit, formState: { errors }} = useForm({ 
+    //     defaultValues: clearedUserInfo, 
+    //     resolver: zodResolver(schema)
+    // });
+
     const {register, handleSubmit, formState: { errors }} = useForm({ 
-        defaultValues: clearedUserInfo, 
-        resolver: zodResolver(schema)
+        defaultValues: clearedUserInfo
     });
     
     
 
     const handleLoginForm = (formValues: { email: string, password: string }) => {
         const { email, password } = formValues;
-        // Check if the provided email and password match any user in the testUsers array
-        const user = testUsers.find(user => user.email === email && user.password === password);
-        if (!user) {
-            return; // If no user is found, stop further execution
+        const loginUser : any = { 
+            email: email,
+            password: password
         }
-        user.username = "testuser"; // <----------------THIS IS JUST A FILLER TO TEST THE LOGIN NAME GREETING!
-        handleLogin(user);
+        handleLogin(loginUser);
+        // Check if the provided email and password match any user in the testUsers array
+
+        //Check this!
+        // const user = testUsers.find(user => user.email === email && user.password === password);
+        // if (!user) {
+        //     return; // If no user is found, stop further execution
+        // }
+        // user.username = "testuser"; // <----------------THIS IS JUST A FILLER TO TEST THE LOGIN NAME GREETING!
+    
     }
     
-    console.log(errors)
+    //log error
+    //console.log(errors)
     return(
         <form onSubmit={handleSubmit(handleLoginForm)} className="container mt-5">
 

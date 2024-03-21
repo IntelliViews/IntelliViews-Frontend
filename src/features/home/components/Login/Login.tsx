@@ -1,39 +1,70 @@
+import { useCookies } from "react-cookie";
+import { AuthContext } from "../../../../App";
+import { login } from "../../../../services/AuthService";
 import LoginForm from "./Components/LoginForm"
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CookiesProvider } from "react-cookie";
 
-interface User {
-    username?: string;
-    email?: string;
-    password?: string;
+
+interface LoginUser {
+    email: string;
+    password: string;
 }
 
 function Login() {
-    const [loggedInUser, setLoggedInUser] = useState<User>({});
+    const [cookies, setCookie, removeCookie] = useCookies(['user_token']);
+
+    const { userContext } = useContext(AuthContext)!;
+    const [error, setError] = useState();
+    const [user, setUser] = userContext;
+    const [successMessage, setSuccessMessage] = useState<string | null>(null); // New state for success message
   
-    const handleLogin = ( values: object ) => {
+    const handleLogin = ( values: LoginUser) => {
       //send data to the server here
+      login(values)
+      .then((data: any) => {
+        setUser(data.data.username);
+        setSuccessMessage(data.message)
+        setLoggedInUser(values);
+        setCookie('user_token', data.data.token, {path: '/'});
+        setError(null); // Reset error state on successful login
+        
+      })
+      .catch((err) => {
+        setError(err.response.data.message)
+        setSuccessMessage(null);
+        removeCookie('user_token');
+    });
   
       console.log("Logged in user:", values);
-      setLoggedInUser(values);
+      
     };
     
     const logout = () => {
         setLoggedInUser({});
+        removeCookie('user_token',{path:'/'});
     }
 
     return (
         <div className="container mt-5">
-            {loggedInUser.username ? (
-                <>
-                    <h2 className="container">Welcome back {loggedInUser.username}!</h2>
-                    <button onClick={logout} className="btn btn-primary">Log out</button>
-                </>
-            ) : (
-                <>
-                    <h2 className="container">Welcome back</h2>
-                    <LoginForm handleLogin={handleLogin} />
-                </>
-            )}
+            <CookiesProvider>
+                <div>{cookies.user_token ? 
+                 (
+                    <>
+                        <h2 className="container">Welcome back {loggedInUser.username}!</h2>
+                        <button onClick={logout} className="btn btn-primary">Log out</button>
+                    </>
+                ) :(
+                    <>
+                        <h2 className="container">Welcome back</h2>
+                        <LoginForm handleLogin={handleLogin} />
+                    </>
+                )}
+
+                {error  && <p style={{ color: "red" }}>{error}</p>}
+            {successMessage  && <p style={{ color: "cyan" }}>{successMessage}</p>}
+                </div>
+            </CookiesProvider>
         </div>
     )
 }
