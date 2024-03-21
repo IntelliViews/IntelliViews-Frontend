@@ -1,16 +1,9 @@
 import { useEffect, useState } from "react";
 import FeedbackForm from "./components/feedback/FeedbackForm";
 import ThreadList from "./components/threads/ThreadList";
-import ChatHistory from "./components/users-history/ChatHistory";
 import UsersList from "./components/users/UsersList";
 import "./styles/AdminPage.css";
 import { getMessages } from "../../services/OpenAiService";
-import ChatWindow from "../chat/ChatWindow";
-
-interface User {
-  id: string;
-  createdAt: number;
-}
 
 interface Thread {
   id: string;

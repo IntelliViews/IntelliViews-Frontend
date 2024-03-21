@@ -1,5 +1,4 @@
 import axios from "axios";
-import { threadId } from "worker_threads";
 
 const BASE_API_URL = "https://api.openai.com/v1/";
 const headers = {
