@@ -1,25 +1,38 @@
-import { useState } from "react";
-import ProfileIcon from "../common/profile-icon/ProfileIcon";
+import { useEffect, useState } from "react";
 import FeedbackForm from "./components/feedback/FeedbackForm";
 import ThreadList from "./components/threads/ThreadList";
 import ChatHistory from "./components/users-history/ChatHistory";
 import UsersList from "./components/users/UsersList";
 import "./styles/AdminPage.css";
+import { getMessages } from "../../services/OpenAiService";
+import ChatWindow from "../chat/ChatWindow";
 
 interface User {
-  Id: string;
-  CreatedAt: number;
+  id: string;
+  createdAt: number;
 }
 
 interface Thread {
-  Id: string;
-  CreatedAt: number;
-  UserId: string;
+  id: string;
+  createdAt: number;
+  userId: string;
 }
 
 export default function AdminPage() {
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedUser, setSelectedUser] = useState<any | null>(null);
   const [selectedThread, setSelectedThread] = useState<Thread | null>(null);
+  const [messages, setMessages] = useState([]);
+
+  function fetchMessages() {
+    if (!selectedThread) return;
+    getMessages(selectedThread?.id).then((response) =>
+      setMessages(response.data)
+    );
+  }
+
+  useEffect(() => {
+    fetchMessages();
+  }, [selectedThread]);
 
   return (
     <div className="container container__admin" style={{ height: "auto" }}>
@@ -32,7 +45,7 @@ export default function AdminPage() {
       {/* List of threads when on specific user */}
       <div className="card card__admin-item">
         <h3>List of mock-interview threads</h3>
-        <ThreadList />
+        {selectedUser && <ThreadList selectedUser={selectedUser} />}
       </div>
 
       {/* Chat history on specific thread */}
@@ -42,7 +55,6 @@ export default function AdminPage() {
           <p className="text-muted pb-2">
             Select mock-interview thread to display
           </p>
-          <ChatHistory />
         </div>
       </div>
 

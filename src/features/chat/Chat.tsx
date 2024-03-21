@@ -7,9 +7,9 @@ import {
   isRunComplete,
 } from "../../services/OpenAiService";
 import "./Chat.css";
-import ChatMessage from "./ChatMessage";
 import { saveThread } from "../../services/IntelliViewsService";
 import { AuthContext } from "../../App";
+import ChatWindow from "./ChatWindow";
 
 export default function Chat() {
   const { userContext } = useContext(AuthContext);
@@ -92,15 +92,7 @@ export default function Chat() {
       {error && <p style={{ color: "red" }}>{error}</p>}
       <ul className="chat__window">
         {isResponding && <p>Responding...</p>}
-        {messages.map((message, idx) => (
-          <>
-            <ChatMessage
-              key={idx}
-              message={message}
-              isUser={message.role === "user"}
-            />
-          </>
-        ))}
+        <ChatWindow messages={messages} isResponding={isResponding} />
       </ul>
       <form
         className="chat__user-input d-flex flex-row card"

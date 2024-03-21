@@ -1,4 +1,3 @@
-import React from "react";
 import ProfileIcon from "../../../common/profile-icon/ProfileIcon";
 
 export default function FeedbackForm() {
@@ -15,40 +14,10 @@ export default function FeedbackForm() {
               className="form-control"
               id="textAreaExample"
               placeholder="Please write feedback to the user here!"
-              rows="4"
+              rows={4}
             ></textarea>
           </div>
         </div>
-      </div>
-
-      {/* Improvement points field */}
-      <div className="field field-improvment m-3 my-4 ">
-        <h4> Specify 1 - 3 points that user can improve!</h4>
-        <form id="improvement-point-form ">
-          <div className="input-group mb-3 ">
-            <input
-              type="text"
-              className="form-control"
-              id="form-input"
-              placeholder="Add new improvement point"
-              required
-            ></input>
-
-            <input
-              type="text"
-              className="form-control"
-              id="form-input1"
-              placeholder="Add new improvement point"
-            ></input>
-
-            <input
-              type="text"
-              className="form-control"
-              id="form-input3"
-              placeholder="Add new improvement point"
-            ></input>
-          </div>
-        </form>
       </div>
 
       {/* Score field */}
