@@ -14,3 +14,10 @@
 .card__profile-info {
   min-height: 300px;
 }
+
+.card__profile-info--span-2 {
+  display: flex;
+  justify-content: space-around;
+  min-height: 300px;
+  grid-column: 1 / span 2;
+}
