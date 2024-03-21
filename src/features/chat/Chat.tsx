@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import {
   createMessage,
   createRun,
@@ -8,15 +8,25 @@ import {
 } from "../../services/OpenAiService";
 import "./Chat.css";
 import ChatMessage from "./ChatMessage";
+import { saveThread } from "../../services/IntelliViewsService";
+import { AuthContext } from "../../App";
 
 export default function Chat() {
+  const { userContext } = useContext(AuthContext);
   const [threadId, setThreadId] = useState<string | null>(null);
   const [userInput, setUserInput] = useState<string>("");
   const [messages, setMessages] = useState<any[]>([]);
 
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isResponding, setIsResponding] = useState(false);
+
   const fetchCreateThread = () => {
     createThread().then((data) => {
       setThreadId(data.data.id);
+      saveThread(data.data.id, userContext.user.id).catch((err) =>
+        setError(err.message)
+      );
       localStorage.setItem("threadId", data.data.id);
       return data;
     });
@@ -25,6 +35,7 @@ export default function Chat() {
   const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
   const fetchCreateMessage = async (content: string, threadId: string) => {
+    setIsResponding(true);
     createMessage(content, threadId).finally(() => fetchMessages(threadId));
     const runId = (await createRun(threadId)).data.id;
     let isComplete = (await isRunComplete(threadId, runId)) === "completed";
@@ -34,12 +45,16 @@ export default function Chat() {
       isComplete = (await isRunComplete(threadId, runId)) === "completed";
     }
     fetchMessages(threadId);
+    setIsResponding(false);
   };
 
   const fetchMessages = (threadId: string) => {
-    getMessages(threadId).then((data) => {
-      setMessages(data.data.data);
-    });
+    setIsLoading(true);
+    getMessages(threadId)
+      .then((data) => {
+        setMessages(data.data.data);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -49,7 +64,7 @@ export default function Chat() {
       content: [
         {
           text: {
-            value: "",
+            value: userInput,
           },
         },
       ],
@@ -58,7 +73,7 @@ export default function Chat() {
       created_at: 0,
     };
     setUserInput("");
-    setMessages([...messages, userMessage]);
+    setMessages([userMessage, ...messages]);
     fetchCreateMessage(userInput, threadId);
   };
 
@@ -74,13 +89,17 @@ export default function Chat() {
 
   return (
     <div className="container d-flex flex-column align-items-center w-100 gap-3">
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <ul className="chat__window">
+        {isResponding && <p>Responding...</p>}
         {messages.map((message, idx) => (
-          <ChatMessage
-            key={idx}
-            message={message}
-            isUser={message.role === "user"}
-          />
+          <>
+            <ChatMessage
+              key={idx}
+              message={message}
+              isUser={message.role === "user"}
+            />
+          </>
         ))}
       </ul>
       <form
@@ -96,6 +115,19 @@ export default function Chat() {
           Send
         </button>
       </form>
+      {isLoading && !isResponding && <p>Loading...</p>}
+      {messages.length != 0 && (
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => {
+            localStorage.removeItem("threadId");
+            location.reload();
+          }}
+        >
+          New Chat
+        </button>
+      )}
     </div>
   );
 }
