@@ -33,8 +33,6 @@ function Login() {
         setSuccessMessage(null);
         removeCookie("user_token");
       });
-
-    console.log("Logged in user:", values);
   };
 
   const logout = () => {

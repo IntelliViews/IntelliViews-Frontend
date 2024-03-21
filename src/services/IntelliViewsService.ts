@@ -8,14 +8,9 @@ const headers = {
   Authorization: `Bearer ${bearerToken}`,
 };
 
-export const saveThread = (threadId: string, userId: string) => {
-  console.log(threadId, userId);
+export const saveThread = (threadId: string) => {
   const data = axios
-    .post(
-      BASE_API_URL + "threads",
-      { id: threadId, userId: userId },
-      { headers: headers }
-    )
+    .post(BASE_API_URL + "threads", { id: threadId }, { headers: headers })
     .then((response) => response.data);
   return data;
 };

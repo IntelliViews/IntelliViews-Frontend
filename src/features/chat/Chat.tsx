@@ -12,7 +12,7 @@ import { AuthContext } from "../../App";
 import ChatWindow from "./ChatWindow";
 
 export default function Chat() {
-  const { userContext } = useContext(AuthContext);
+  const { userContext } = useContext(AuthContext)!;
   const [user] = userContext;
   const [threadId, setThreadId] = useState<string | null>(null);
   const [userInput, setUserInput] = useState<string>("");
@@ -25,11 +25,8 @@ export default function Chat() {
   const fetchCreateThread = () => {
     createThread().then((data: any) => {
       setThreadId(data.data.id);
-      saveThread(data.data.id, user.id)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err: any) => setError(err.message));
+      console.log(userContext);
+      saveThread(data.data.id).catch((err: any) => setError(err.message));
       localStorage.setItem("threadId", data.data.id);
       return data;
     });
@@ -84,7 +81,6 @@ export default function Chat() {
     const storedThreadId = localStorage.getItem("threadId");
     if (!storedThreadId) {
       fetchCreateThread();
-      console.log(storedThreadId);
       return;
     }
     setThreadId(storedThreadId);

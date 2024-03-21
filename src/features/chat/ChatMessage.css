@@ -18,5 +18,5 @@
 }
 
 .chat__message--assistant {
-  background-color: var(--bs-secondary);
+  background-color: var(--bs-tertiary);
 }

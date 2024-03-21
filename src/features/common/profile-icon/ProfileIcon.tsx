@@ -18,9 +18,11 @@ export default function ProfileIcon(props: Props) {
         color: props.color || "#fff",
       }}
     >
-      <h1 style={{ fontSize: props.diameter / 2 }}>
-        {props.username.slice(0, 2).toUpperCase()}
-      </h1>
+      {props.username && (
+        <h1 style={{ fontSize: props.diameter / 2 }}>
+          {props.username.slice(0, 2).toUpperCase()}
+        </h1>
+      )}
     </div>
   );
 }
