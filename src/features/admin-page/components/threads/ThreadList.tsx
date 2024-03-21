@@ -12,11 +12,7 @@ export default function ThreadList(props: Props) {
   useEffect(() => {
     setThreads([]);
     getThreadsByUser(props.selectedUser.id).then((response: any) => {
-      response.data.map((thread: any) =>
-        getThreadById(thread.id).then((response: any) => {
-          setThreads([...threads, response.data]);
-        })
-      );
+      response.data.map((thread: any) => console.log(thread));
     });
   }, [props.selectedUser.id]);
 
