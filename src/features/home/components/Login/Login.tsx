@@ -25,7 +25,6 @@ function Login() {
       .then((data: any) => {
         setUser(data.data.username);
         setSuccessMessage(data.message)
-        setLoggedInUser(values);
         setCookie('user_token', data.data.token, {path: '/'});
         setError(null); // Reset error state on successful login
         
@@ -41,8 +40,8 @@ function Login() {
     };
     
     const logout = () => {
-        setLoggedInUser({});
         removeCookie('user_token',{path:'/'});
+        setSuccessMessage(null)
     }
 
     return (
@@ -51,7 +50,7 @@ function Login() {
                 <div>{cookies.user_token ? 
                  (
                     <>
-                        <h2 className="container">Welcome back {loggedInUser.username}!</h2>
+                        <h2 className="container">Welcome back {user.username}!</h2>
                         <button onClick={logout} className="btn btn-primary">Log out</button>
                     </>
                 ) :(
