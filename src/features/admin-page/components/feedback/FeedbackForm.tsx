@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import ProfileIcon from "../../../common/profile-icon/ProfileIcon";
+import { AuthContext } from "../../../../App";
 
 export default function FeedbackForm() {
-  //TODO1: implement submit logic
-  //TODO2: Post the data
+  const { userContext } = useContext(AuthContext)!;
+  const [user] = userContext;
+
   return (
     <form action="" className=" ">
       {/* Feedback field */}
       <div className="field field-feedback m-3 my-4">
         <div className="d-flex flex-start w-100 gap-3">
-          <ProfileIcon diameter={80} username="Username" />
+          <ProfileIcon diameter={80} username={user.username} />
           <div className="form-outline w-100">
             <textarea
               className="form-control"
@@ -22,7 +25,7 @@ export default function FeedbackForm() {
 
       {/* Score field */}
       <div className="field field-score m-3 ">
-        <h4> Select score</h4>
+        <h4>Select score</h4>
         <div
           className="btn-toolbar"
           role="toolbar"
