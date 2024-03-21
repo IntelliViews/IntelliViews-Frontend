@@ -28,3 +28,9 @@ export const getThreadsByUser = (userId: string) => {
     .then((response) => response.data);
   return data;
 };
+
+export const getFeedbackThreads = () => {
+  return axios
+    .get(BASE_API_URL + "threads/feedback", { headers: headers })
+    .then((response) => response.data);
+};
