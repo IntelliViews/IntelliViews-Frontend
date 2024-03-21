@@ -18,7 +18,7 @@ export default function AdminPage() {
 
   function fetchMessages() {
     if (!selectedThread) return;
-    getMessages(selectedThread?.id).then((response) =>
+    getMessages(selectedThread?.id).then((response: any) =>
       setMessages(response.data)
     );
   }
