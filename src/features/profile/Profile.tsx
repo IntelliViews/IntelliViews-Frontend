@@ -51,6 +51,7 @@ export default function Profile() {
   }, []);
 
   //No time to set up real threads for my part, mock have to do
+  /*
   const testThreads = [
     {
       "id": "1",
@@ -83,20 +84,19 @@ export default function Profile() {
       "metadata": {}
     }
   ];
-
-  console.log(feedbackThreads);
+  */
 
   return (
     <div className="container" style={{ height: "auto" }}>
       <h1>Interview overview for {user.email}</h1>
       <div className="container__profile">
         <div className="card card__profile-info">
-          <h2>Latest ratings:</h2>
+          <h2>Three latest ratings podium:</h2>
           <ProfileRatingsList feedbackThreads={feedbackThreads}/>
         </div>
         <div className="card card__profile-info">
           <h2>Interview history:</h2>
-          <ProfileInterviewHistory threads={ testThreads } /> {/*change to threads */}
+          <ProfileInterviewHistory threads={ threads } />
         </div>
       </div>
     </div>
