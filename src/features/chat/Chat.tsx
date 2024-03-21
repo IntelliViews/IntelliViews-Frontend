@@ -12,7 +12,8 @@ import { AuthContext } from "../../App";
 import ChatWindow from "./ChatWindow";
 
 export default function Chat() {
-  const { userContext } = useContext(AuthContext);
+  const { userContext } = useContext(AuthContext)!;
+  const [user] = userContext;
   const [threadId, setThreadId] = useState<string | null>(null);
   const [userInput, setUserInput] = useState<string>("");
   const [messages, setMessages] = useState<any[]>([]);
@@ -24,9 +25,8 @@ export default function Chat() {
   const fetchCreateThread = () => {
     createThread().then((data: any) => {
       setThreadId(data.data.id);
-      saveThread(data.data.id, userContext.user.id).catch((err: any) =>
-        setError(err.message)
-      );
+      console.log(userContext);
+      saveThread(data.data.id).catch((err: any) => setError(err.message));
       localStorage.setItem("threadId", data.data.id);
       return data;
     });
@@ -85,15 +85,12 @@ export default function Chat() {
     }
     setThreadId(storedThreadId);
     fetchMessages(storedThreadId);
-  }, []);
+  }, [user]);
 
   return (
     <div className="container d-flex flex-column align-items-center w-100 gap-3">
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <ul className="chat__window">
-        {isResponding && <p>Responding...</p>}
-        <ChatWindow messages={messages} isResponding={isResponding} />
-      </ul>
+      <ChatWindow messages={messages} isResponding={isResponding} />
       <form
         className="chat__user-input d-flex flex-row card"
         onSubmit={(e) => onSubmit(e)}

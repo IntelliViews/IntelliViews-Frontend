@@ -38,7 +38,6 @@ export const isRunComplete = async (threadId: string, runId: string) => {
     BASE_API_URL + `threads/${threadId}/runs/${runId}`,
     { headers: headers }
   );
-  console.log(run.data);
   return run.data.status;
 };
 
