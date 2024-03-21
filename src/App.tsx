@@ -1,15 +1,23 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import MainLayout from "./features/layouts/MainLayout";
 import Home from "./features/home/Home";
 import Profile from "./features/profile/Profile";
 import Registration from "./features/registration/Registration";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Chat from "./features/chat/Chat";
+import { createContext } from "react";
 import AdminPage from "./features/admin-page/AdminPage";
 
+type AuthContextType = {
+  userContext: any[];
+};
+export const AuthContext = createContext<AuthContextType | null>(null);
+
 function App() {
+  const [user, setUser] = useState();
+
   const router = useMemo(() => {
     return createBrowserRouter([
       {
@@ -28,7 +36,9 @@ function App() {
 
   return (
     <div className="iv-container">
-      <RouterProvider router={router} />
+      <AuthContext.Provider value={{ userContext: [user, setUser] }}>
+        <RouterProvider router={router} />
+      </AuthContext.Provider>
     </div>
   );
 }

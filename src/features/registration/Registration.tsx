@@ -1,53 +1,42 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import RegistrationForm from "./components/RegistrationForm";
-
-interface User {
-  username?: string;
-  email?: string;
-}
+import { AuthContext } from "../../App";
+import { register } from "../../services/AuthService";
 
 function Registration() {
-  const [registeredUser, setRegisteredUser] = useState<User>({});
-  const newUser = {
-    username: "",
-    email: "",
-    password: "",
-    confirmpassword: "" //Unsure if needed here
-  };
+  const { userContext } = useContext(AuthContext)!;
+  const [error, setError] = useState();
+  const [user, setUser] = userContext;
 
-  const handleSave = ( values: object ) => {
+  const handleRegistration = (values: object) => {
     //send data to the server here
-
-    console.log("Registered user:", values);
-    setRegisteredUser(values);
+    register(values)
+      .then((data: any) => {
+        setUser(data.data);
+      })
+      .catch((err) => setError(err.response.data.message));
   };
 
-  if(!registeredUser.username) {
-
-    return (
-      <div className="container mt-5">
-        <h2>Register your account</h2>
-        <RegistrationForm onSave={handleSave} {...{ newUser }}/>
-      </div>
-    );
-
-  } else {
-    //Alternatively, we can use a custom "registered" page.
-    return (
-      <div className="container mt-5">
-        <h2>New account registered</h2>
-        <h5>Username:</h5>
-        <p>{registeredUser.username}</p>
-        <h5>Email:</h5>
-        <p>{registeredUser.email}</p>
-        <Link to="/" className="btn btn-primary">To Login</Link>
-        {/* <p> Please check your email to validate your account. </p> */}
-      </div>
-    )
-
-  }
-
+  return (
+    <div className="container mt-5">
+      <h2>Register your account</h2>
+      <RegistrationForm handleRegistration={handleRegistration} />
+      {user && (
+        <>
+          <h2>New account registered</h2>
+          <h5>Username:</h5>
+          <p>{user.userName}</p>
+          <h5>Email:</h5>
+          <p>{user.email}</p>
+          <Link to="/" className="btn btn-primary">
+            To Login
+          </Link>
+        </>
+      )}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+    </div>
+  );
 }
 
 export default Registration;

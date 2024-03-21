@@ -7,35 +7,26 @@ import UsersList from "./components/users/UsersList";
 import "./styles/AdminPage.css";
 
 interface User {
-    Id: string,
-    CreatedAt: number,
-  }
+  Id: string;
+  CreatedAt: number;
+}
 
-  interface Thread {
-    Id: string,
-    CreatedAt: number,
-    UserId: string
-  }
-
+interface Thread {
+  Id: string;
+  CreatedAt: number;
+  UserId: string;
+}
 
 export default function AdminPage() {
-    const [selectedUser, setSelectedUser] = useState<User | null>(null);
-    const [selectedThread, setSelectedThread] = useState<Thread | null>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedThread, setSelectedThread] = useState<Thread | null>(null);
 
   return (
     <div className="container container__admin" style={{ height: "auto" }}>
-      {/* Admin page header */}
-      <div className="card card__admin-user">
-        <div className="card__admin-user__user-info">
-          <ProfileIcon diameter={96} username="Username" />
-          <h1>ADMIN Username Here</h1>
-        </div>
-      </div>
-
       {/* List of users */}
       <div className="card card__admin-item">
         <h3>List of users</h3>
-        <UsersList setSelectedUser={setSelectedUser}/>
+        <UsersList setSelectedUser={setSelectedUser} />
       </div>
 
       {/* List of threads when on specific user */}
