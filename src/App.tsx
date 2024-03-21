@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Chat from "./features/chat/Chat";
 import { createContext } from "react";
 import AdminPage from "./features/admin-page/AdminPage";
+import Login from "./features/home/components/Login/Login";
 
 type AuthContextType = {
   userContext: any[];
@@ -29,6 +30,7 @@ function App() {
           { path: "/interview", element: <Chat /> },
           { path: "/registration", element: <Registration /> },
           { path: "/admin", element: <AdminPage /> },
+          { path: "/login", element: <Login /> },
         ],
       },
     ]);

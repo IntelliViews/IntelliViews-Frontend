@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
 import ProfileIcon from "../common/profile-icon/ProfileIcon";
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../App";
 
 export default function Header() {
   const { userContext } = useContext(AuthContext)!;
-  const { user } = userContext;
-  const [username, setUsername] = useState("Username");
+  const [user] = userContext;
+
+  useEffect(() => {}, [user]);
   return (
     <nav className="iv-header">
       <div className="iv-header--content container justify-content-between">
@@ -30,9 +31,17 @@ export default function Header() {
         <div className="d-flex align-items-center gap-2 justify-content-end user-select-none">
           {user ? (
             <>
-              <ProfileIcon username={username} diameter={40} />
-              <Link to="/profile" style={{ margin: "0", opacity: "0.7" }}>
-                {username}
+              <ProfileIcon username={user.username} diameter={40} />
+              <Link
+                to="/profile"
+                style={{
+                  margin: "0",
+                  opacity: "0.7",
+                  color: "white",
+                  textDecoration: "none",
+                }}
+              >
+                {user.username}
               </Link>
             </>
           ) : (
