@@ -1,14 +1,24 @@
+import { useContext, useMemo, useState } from "react";
 import ProfileIcon from "../../../common/profile-icon/ProfileIcon";
+import { AuthContext } from "../../../../App";
 
 export default function FeedbackForm() {
-  //TODO1: implement submit logic
-  //TODO2: Post the data
+  const { userContext } = useContext(AuthContext)!;
+  const [user] = userContext;
+  const [ratingRange] = useState<number[]>([]);
+
+  useMemo(() => {
+    for (let i = 1; i <= 10; i++) {
+      ratingRange.push(i);
+    }
+  }, [ratingRange]);
+
   return (
-    <form action="" className=" ">
+    <form action="" className="">
       {/* Feedback field */}
       <div className="field field-feedback m-3 my-4">
         <div className="d-flex flex-start w-100 gap-3">
-          <ProfileIcon diameter={80} username="Username" />
+          <ProfileIcon diameter={80} username={user.username} />
           <div className="form-outline w-100">
             <textarea
               className="form-control"
@@ -21,44 +31,33 @@ export default function FeedbackForm() {
       </div>
 
       {/* Score field */}
-      <div className="field field-score m-3 ">
-        <h4> Select score</h4>
+      <div className="field field-score">
+        <h4>Select score</h4>
         <div
           className="btn-toolbar"
           role="toolbar"
           aria-label="Toolbar with button groups"
         >
           <div className="btn-group me-2" role="group" aria-label="First group">
-            <button type="button" className="btn btn-info">
-              1
-            </button>
-            <button type="button" className="btn btn-primary">
-              2
-            </button>
-            <button type="button" className="btn btn-primary">
-              3
-            </button>
-            <button type="button" className="btn btn-primary">
-              4
-            </button>
-            <button type="button" className="btn btn-primary">
-              5
-            </button>
-            <button type="button" className="btn btn-primary">
-              6
-            </button>
-            <button type="button" className="btn btn-primary">
-              7
-            </button>
-            <button type="button" className="btn btn-primary">
-              8
-            </button>
-            <button type="button" className="btn btn-primary">
-              9
-            </button>
-            <button type="button" className="btn btn-info">
-              10
-            </button>
+            {ratingRange.map((value) => (
+              <>
+                <input
+                  type="radio"
+                  className="btn-check"
+                  name="btnradio"
+                  id={`radio-${value}`}
+                  autoComplete="off"
+                  defaultChecked
+                />
+                <label
+                  className="btn btn-outline-primary"
+                  style={{ color: "white" }}
+                  htmlFor={`radio-${value}`}
+                >
+                  {value}
+                </label>
+              </>
+            ))}
           </div>
         </div>
       </div>
@@ -66,7 +65,7 @@ export default function FeedbackForm() {
       {/* Buttons */}
       <div className="float-end mt-2 pt-1">
         <button type="button" className="btn btn-primary btn-sm">
-          Submit feedback!
+          Submit
         </button>
         <button type="button" className="btn btn-outline-white btn-sm">
           Cancel

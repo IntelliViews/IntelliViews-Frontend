@@ -9,7 +9,7 @@ export default function ChatWindow(props: Props) {
   const { isResponding, messages } = props;
 
   return (
-    <ul className="chat__window">
+    <div className="chat__window">
       {isResponding && <p>Responding...</p>}
       {messages.map((message, idx) => (
         <ChatMessage
@@ -18,6 +18,6 @@ export default function ChatWindow(props: Props) {
           isUser={message.role === "user"}
         />
       ))}
-    </ul>
+    </div>
   );
 }

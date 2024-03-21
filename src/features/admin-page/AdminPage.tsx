@@ -4,6 +4,7 @@ import ThreadList from "./components/threads/ThreadList";
 import UsersList from "./components/users/UsersList";
 import "./styles/AdminPage.css";
 import { getMessages } from "../../services/OpenAiService";
+import ChatWindow from "../chat/ChatWindow";
 
 interface Thread {
   id: string;
@@ -18,9 +19,9 @@ export default function AdminPage() {
 
   function fetchMessages() {
     if (!selectedThread) return;
-    getMessages(selectedThread?.id).then((response: any) =>
-      setMessages(response.data)
-    );
+    getMessages(selectedThread?.id).then((response: any) => {
+      setMessages(response.data.data);
+    });
   }
 
   useEffect(() => {
@@ -31,33 +32,38 @@ export default function AdminPage() {
     <div className="container container__admin" style={{ height: "auto" }}>
       {/* List of users */}
       <div className="card card__admin-item">
-        <h3>List of users</h3>
+        <h3>Users</h3>
         <UsersList setSelectedUser={setSelectedUser} />
       </div>
 
       {/* List of threads when on specific user */}
       <div className="card card__admin-item">
-        <h3>List of mock-interview threads</h3>
-        {selectedUser && <ThreadList selectedUser={selectedUser} />}
+        <h3>Mock-interviews</h3>
+        {selectedUser && (
+          <ThreadList
+            selectedUser={selectedUser}
+            selectedThread={setSelectedThread}
+          />
+        )}
       </div>
 
       {/* Chat history on specific thread */}
       <div className="card card__admin-user">
-        <div className="card__profile-user__user-checklist">
-          <h3> Chat history </h3>
-          <p className="text-muted pb-2">
-            Select mock-interview thread to display
-          </p>
+        <h3>Chat history</h3>
+        <div className="d-flex justify-content-center">
+          {messages && messages.length > 0 ? (
+            <ChatWindow messages={messages} />
+          ) : (
+            <p>No messages</p>
+          )}
         </div>
       </div>
 
       {/* Feedback form */}
-      <div className="card card__admin-user">
-        <div className="card__admin-user__user-feedback">
-          <h3> Feedback form </h3>
-          <p className="text-muted pb-2">
-            Please provide feedback to user mock-interview
-          </p>
+      <div style={{ gridColumn: "1 / span 2" }}>
+        <div>
+          <h3>Feedback</h3>
+          <p className="text-muted pb-2">Please provide feedback to the user</p>
           <FeedbackForm />
         </div>
       </div>

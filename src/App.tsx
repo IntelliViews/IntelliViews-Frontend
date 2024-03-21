@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import MainLayout from "./features/layouts/MainLayout";
 import Home from "./features/home/Home";
 import Profile from "./features/profile/Profile";
@@ -18,6 +18,12 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 
 function App() {
   const [user, setUser] = useState();
+
+  useEffect(() => {
+    const sessionUser = sessionStorage.getItem("user");
+    if (!sessionUser) return;
+    setUser(JSON.parse(sessionUser));
+  }, []);
 
   const router = useMemo(() => {
     return createBrowserRouter([
