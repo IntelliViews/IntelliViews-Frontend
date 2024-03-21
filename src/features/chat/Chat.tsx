@@ -22,9 +22,9 @@ export default function Chat() {
   const [isResponding, setIsResponding] = useState(false);
 
   const fetchCreateThread = () => {
-    createThread().then((data) => {
+    createThread().then((data: any) => {
       setThreadId(data.data.id);
-      saveThread(data.data.id, userContext.user.id).catch((err) =>
+      saveThread(data.data.id, userContext.user.id).catch((err: any) =>
         setError(err.message)
       );
       localStorage.setItem("threadId", data.data.id);
@@ -51,7 +51,7 @@ export default function Chat() {
   const fetchMessages = (threadId: string) => {
     setIsLoading(true);
     getMessages(threadId)
-      .then((data) => {
+      .then((data: any) => {
         setMessages(data.data.data);
       })
       .finally(() => setIsLoading(false));
