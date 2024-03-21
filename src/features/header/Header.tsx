@@ -24,6 +24,9 @@ export default function Header() {
           <Link className="nav-link" to="/interview">
             Interview
           </Link>
+          <Link className="nav-link" to="/admin">
+            Test
+          </Link>
         </div>
         <div className="d-flex align-items-center gap-2 justify-content-end user-select-none">
           {user ? (

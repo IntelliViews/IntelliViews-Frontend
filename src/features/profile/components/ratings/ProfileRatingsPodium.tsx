@@ -19,7 +19,7 @@ export default function ProfileRatingsPodium(props: Props) {
       >
         {(props.rating / 10) * 100}%
       </span>
-      <Link to="/">View</Link>
+      <Link to="/" className="btn btn-primary btn-sm">View</Link>
     </div>
   );
 }

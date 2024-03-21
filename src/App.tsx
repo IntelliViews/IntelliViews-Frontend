@@ -7,12 +7,8 @@ import Profile from "./features/profile/Profile";
 import Registration from "./features/registration/Registration";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Chat from "./features/chat/Chat";
-import { createContext } from "react";
+import AdminPage from "./features/admin-page/AdminPage";
 
-type AuthContextType = {
-  userContext: any[];
-};
-export const AuthContext = createContext<AuthContextType | null>(null);
 
 function App() {
   const [user, setUser] = useState();
@@ -27,6 +23,7 @@ function App() {
           { path: "/profile", element: <Profile /> },
           { path: "/interview", element: <Chat /> },
           { path: "/registration", element: <Registration /> },
+          { path: "/admin", element: <AdminPage /> },
         ],
       },
     ]);
