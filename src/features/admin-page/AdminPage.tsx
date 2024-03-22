@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import FeedbackForm from "./components/feedback/FeedbackForm";
 import ThreadList from "./components/threads/ThreadList";
 import UsersList from "./components/users/UsersList";
@@ -11,6 +11,8 @@ interface Thread {
   createdAt: number;
   userId: string;
 }
+
+export const AdminContext = createContext<any | null>(null);
 
 export default function AdminPage() {
   const [selectedUser, setSelectedUser] = useState<any | null>(null);
@@ -64,7 +66,9 @@ export default function AdminPage() {
         <div>
           <h3>Feedback</h3>
           <p className="text-muted pb-2">Please provide feedback to the user</p>
-          <FeedbackForm />
+          <AdminContext.Provider value={{ selectedUser, selectedThread }}>
+            <FeedbackForm />
+          </AdminContext.Provider>
         </div>
       </div>
     </div>

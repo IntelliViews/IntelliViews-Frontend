@@ -1,11 +1,16 @@
-import { useContext, useMemo, useState } from "react";
+import { FormEvent, useContext, useMemo, useState } from "react";
 import ProfileIcon from "../../../common/profile-icon/ProfileIcon";
 import { AuthContext } from "../../../../App";
+import { postFeedback } from "../../../../services/IntelliViewsService";
+import { AdminContext } from "../../AdminPage";
 
 export default function FeedbackForm() {
   const { userContext } = useContext(AuthContext)!;
+  const { selectedUser, selectedThread } = useContext(AdminContext)!;
   const [user] = userContext;
   const [ratingRange] = useState<number[]>([]);
+  const [rating, setRating] = useState(1);
+  const [context, setContext] = useState("");
 
   useMemo(() => {
     for (let i = 1; i <= 10; i++) {
@@ -13,8 +18,21 @@ export default function FeedbackForm() {
     }
   }, [ratingRange]);
 
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    const feedback = {
+      userId: selectedUser.id,
+      threadId: selectedThread.id,
+      context: context,
+      score: rating,
+    };
+    postFeedback(feedback);
+    setRating(1);
+    setContext("");
+  };
+
   return (
-    <form action="" className="">
+    <form onSubmit={(e) => handleSubmit(e)} className="">
       {/* Feedback field */}
       <div className="field field-feedback m-3 my-4">
         <div className="d-flex flex-start w-100 gap-3">
@@ -23,6 +41,8 @@ export default function FeedbackForm() {
             <textarea
               className="form-control"
               id="textAreaExample"
+              value={context}
+              onChange={(e) => setContext(e.target.value)}
               placeholder="Please write feedback to the user here!"
               rows={4}
             ></textarea>
@@ -45,9 +65,11 @@ export default function FeedbackForm() {
                   type="radio"
                   className="btn-check"
                   name="btnradio"
+                  key={`radio-${value}`}
                   id={`radio-${value}`}
                   autoComplete="off"
-                  defaultChecked
+                  checked={value === rating}
+                  onChange={() => setRating(value)}
                 />
                 <label
                   className="btn btn-outline-primary"
@@ -64,7 +86,7 @@ export default function FeedbackForm() {
 
       {/* Buttons */}
       <div className="float-end mt-2 pt-1">
-        <button type="button" className="btn btn-primary btn-sm">
+        <button type="submit" className="btn btn-primary btn-sm">
           Submit
         </button>
         <button type="button" className="btn btn-outline-white btn-sm">
