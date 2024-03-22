@@ -34,3 +34,18 @@ export const getFeedbackThreads = () => {
     .get(BASE_API_URL + "threads/feedback", { headers: headers })
     .then((response) => response.data);
 };
+
+interface Feedback {
+  userId: string;
+  threadId: string;
+  context: string;
+  score: number;
+}
+
+export const postFeedback = (feedback: Feedback) => {
+  return axios
+    .post(BASE_API_URL + "threads/feedback", feedback, {
+      headers: headers,
+    })
+    .then((response) => response.data);
+};
